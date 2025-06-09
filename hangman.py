@@ -1,9 +1,10 @@
 import random
 import json
 import os
+from typing import List, Dict
 
 
-def main():
+def main() -> None:
     while True:
         play_game()
         play_again = input("Do you want to play again? (y/n): ")
@@ -12,7 +13,7 @@ def main():
             break
 
 
-def play_game():
+def play_game() -> None:
     word = select_word()
     word_status = ["_"] * len(word)
     used_guesses = []
@@ -46,7 +47,7 @@ def play_game():
             break
 
 
-def select_word():
+def select_word() -> str:
     with open("categories.json", "r") as file:
         categories = json.load(file)
         category = choose_category(categories)
@@ -58,7 +59,7 @@ def select_word():
         )  # ensure chosen word is formatted correctly
 
 
-def choose_category(categories):
+def choose_category(categories: Dict[str, List[str]]) -> str:
     while True:
         category = (
             input(f"Choose category: {", ".join(categories.keys())}\n").strip().lower()
@@ -68,13 +69,13 @@ def choose_category(categories):
         print("Invalid category, try again.")
 
 
-def display_gamestate(hangman_status, word_status, used_guesses, hangman_art):
+def display_gamestate(hangman_status: int, word_status: List[str], used_guesses: List[str], hangman_art: List[str]) -> None:
     print(hangman_art[hangman_status])
     print(" ".join(word_status))
     print(f"Used guesses: {', '.join(used_guesses)}")
 
 
-def get_guess(used_guesses):
+def get_guess(used_guesses: List[str]) -> str:
     while True:
         guess = input("Guess: ").upper()
         if not guess.isalpha():
@@ -87,13 +88,13 @@ def get_guess(used_guesses):
             return guess
 
 
-def update_word_status(word, guess, word_status):
+def update_word_status(word: str, guess: str, word_status: List[str]) -> None:
     for i in range(len(word)):
         if word[i] == guess:
             word_status[i] = guess
 
 
-def clear_screen():
+def clear_screen() -> None:
     os.system('cls' if os.name == 'nt' else 'clear') # If on Windows, uses cls command to clear terminal. Otherwise, uses clear (Mac/Linux/Unix)
 
 
