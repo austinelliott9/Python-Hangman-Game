@@ -1,14 +1,85 @@
-# Hangman
-### Video Demo: https://youtu.be/2ek9Izr-ovE
-### Description:
-I decided to go with a simple hangman game for my final project. As demonstrated in the video, the program starts by listing the available categories and asks the user to choose one. If the entered category does not match any of those available, it asks the user to try again. Once a valid category is chosen, ASCII art of the empty gallows is printed, along with the number of blanks ( _ ) that corresponds to the number of letters in the word to be guessed. Used guesses appear below that and the user is prompted to make a guess. Only a single, alphabetic character will be accepted as a valid guess – unique feedback will appear for invalid character types, invalid number of characters, and already-used guesses. Correct guesses result in all instances of that letter being revealed in place of the blanks. Incorrect guesses result in the next body part of the hangman to be printed (head -> body -> left arm -> right arm -> left leg -> right leg). The game ends when either all blank letters are guessed correctly or when the right leg gets drawn. The user is then asked if they want to play again (“y” repeats the program, “n” ends it).
+# 🎮 Python Hangman Game
 
-I initially kept the ASCII art and the categories in the main project.py file but eventually decided to declutter and moved them to their own json files. This also made it a little easier to add new categories, as you just need to open the categories.json and structure one in the same way the others are written. I considered adding a feature to the main program in which “add category” is an option at launch and the user is prompted for a category name + words in the category. I did not get around to it, but it would theoretically be easy because of the json structure.
+A clean, terminal-based implementation of the classic Hangman game written in Python.  
+Choose categories, guess letters, and avoid the noose—all while enjoying retro ASCII visuals!
 
-A few aspects of the program that I would like to highlight:
+---
 
-Lose condition: The integer hangman_status starts at 0 and increments every time an incorrect guess is made. This let me use it to select the correct ASCII art from an array of art for the current gamestate, as well as determine when the game has been lost (if it =6)
+## ✨ Features
 
-Win condition: Since winning the game means that all of the blanks have been filled, I simply decided to check whether “_” is in the word_status after every guess is made. If it isn’t, that means the winning text can be displayed.
+- 🗂️ Multiple word categories via JSON configuration
+- 🎨 ASCII art visuals for each incorrect guess
+- ✅ Real-time input validation with user-friendly feedback
+- 🔁 Play-again loop without restarting the script
+- 🧪 Unit tested with `pytest`
+- 🧱 Modular, readable codebase with docstrings and type hints
+- 📦 Easily extensible with new categories or visuals
 
-Console clearing: While testing, I was getting annoyed with the clutter even while playing the game. One of the last things I added was the automatic clearing of the console after making every guess. Since the command for that differs by operating system, I first check if the program is being run on Windows and use the “cls” command if so. If not, it is likely Mac/Linux/Unix, which all use the “clear” command.
+---
+
+## 📂 Project Structure
+
+```
+Python Hangman Game/
+│
+├── hangman.py            # Main game logic
+├── test_hangman.py       # Unit tests using pytest
+├── categories.json       # Word categories grouped by theme
+├── hangman_art.json      # ASCII art for visualizing the hangman
+├── .gitignore            # Files excluded from Git tracking
+├── .gitattributes        # Git configuration
+└── README.md             # Project documentation
+```
+
+---
+
+## 🚀 How to Run the Game
+
+1. **Clone the repository**:
+```bash
+git clone https://github.com/yourusername/python-hangman-game.git
+cd python-hangman-game
+```
+
+2. **Run the game**:
+```bash
+python hangman.py
+```
+
+---
+
+## 🧪 Run the Tests
+
+Make sure `pytest` is installed:
+```bash
+pip install pytest
+```
+
+Then run the tests:
+```bash
+pytest test_hangman.py
+```
+
+---
+
+## ➕ Add Your Own Categories
+
+To add a new category:
+1. Open `categories.json`
+2. Add a new key and list of words:
+```json
+"vehicles": ["car", "truck", "bicycle"]
+```
+3. Save and relaunch the game—no code edits needed!
+
+---
+
+## 🙌 Acknowledgements
+
+Originally developed as the final project for [CS50's Introduction to Programming with Python (CS50P)](https://cs50.harvard.edu/python). This version was enhanced for GitHub presentation with cleaner code, documentation, and testing.
+
+---
+
+## 🪪 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
