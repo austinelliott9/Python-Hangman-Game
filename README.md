@@ -76,7 +76,7 @@ To add a new category:
 
 ## 🙌 Acknowledgements
 
-Originally developed as the final project for [CS50's Introduction to Programming with Python (CS50P)](https://cs50.harvard.edu/python). This version was enhanced for GitHub presentation with cleaner code, documentation, and testing.
+Originally developed as the final project for [CS50's Introduction to Programming with Python (CS50P)](https://cs50.harvard.edu/python). This version was enhanced for GitHub presentation with cleaner code, documentation, and testing. For a video demonstration created for the course, please click [here](https://www.youtube.com/watch?v=2ek9Izr-ovE).
 
 ---
 
