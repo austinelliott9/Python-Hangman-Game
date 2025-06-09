@@ -20,17 +20,18 @@ def play_game() -> None:
     """
     Executes one full game of Hangman including word selection, user input, and win/loss logic.
     """
-    word = select_word()
-    word_status = ["_"] * len(word)
-    used_guesses = []
-    hangman_status = 0
+    word: str = select_word()
+    word_status: List[str] = ["_"] * len(word)
+    used_guesses: List[str] = []
+    hangman_status: int = 0
+
     with open("hangman_art.json", "r") as file:
-        hangman_art = json.load(file)
+        hangman_art: List[str] = json.load(file)
 
     while True:
         clear_screen()
         display_gamestate(hangman_status, word_status, used_guesses, hangman_art)
-        guess = get_guess(used_guesses)
+        guess: str = get_guess(used_guesses)
         used_guesses.append(guess)
 
         if guess in word:
@@ -58,8 +59,8 @@ def select_word() -> str:
         A formatted word (uppercase, no spaces or dashes).
     """
     with open("categories.json", "r") as file:
-        categories = json.load(file)
-        category = choose_category(categories)
+        categories: Dict[str, List[str]] = json.load(file)
+        category: str = choose_category(categories)
         return (
             random.choice(categories[category])
             .upper()
