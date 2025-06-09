@@ -3,7 +3,6 @@ import json
 import os
 from typing import List, Dict
 
-
 def main() -> None:
     """
     Main loop for running the hangman game. Prompts user to play again after each round.
@@ -11,10 +10,9 @@ def main() -> None:
     while True:
         play_game()
         play_again = input("Do you want to play again? (y/n): ")
-        if play_again != "y":
+        if play_again.lower() != "y":
             print("Thanks for playing!")
             break
-
 
 def play_game() -> None:
     """
@@ -51,7 +49,6 @@ def play_game() -> None:
             print(f"Oh no! You've run out of guesses. The word was {word}. Better luck next time!")
             break
 
-
 def select_word() -> str:
     """
     Randomly selects a word from a chosen category.
@@ -61,13 +58,7 @@ def select_word() -> str:
     with open("categories.json", "r") as file:
         categories: Dict[str, List[str]] = json.load(file)
         category: str = choose_category(categories)
-        return (
-            random.choice(categories[category])
-            .upper()
-            .replace(" ", "")
-            .replace("-", "")
-        )
-
+        return random.choice(categories[category]).upper().replace(" ", "").replace("-", "")
 
 def choose_category(categories: Dict[str, List[str]]) -> str:
     """
@@ -78,13 +69,10 @@ def choose_category(categories: Dict[str, List[str]]) -> str:
         A valid category selected by the user.
     """
     while True:
-        category = (
-            input(f"Choose category: {", ".join(categories.keys())}\n").strip().lower()
-        )
+        category = input(f"Choose category: {', '.join(categories.keys())}\n").strip().lower()
         if category in categories:
             return category
         print("Invalid category, try again.")
-
 
 def display_gamestate(hangman_status: int, word_status: List[str], used_guesses: List[str], hangman_art: List[str]) -> None:
     """
@@ -98,7 +86,6 @@ def display_gamestate(hangman_status: int, word_status: List[str], used_guesses:
     print(hangman_art[hangman_status])
     print(" ".join(word_status))
     print(f"Used guesses: {', '.join(used_guesses)}")
-
 
 def get_guess(used_guesses: List[str]) -> str:
     """
@@ -119,7 +106,6 @@ def get_guess(used_guesses: List[str]) -> str:
         else:
             return guess
 
-
 def update_word_status(word: str, guess: str, word_status: List[str]) -> None:
     """
     Updates the word status to reveal correctly guessed letters.
@@ -132,13 +118,11 @@ def update_word_status(word: str, guess: str, word_status: List[str]) -> None:
         if word[i] == guess:
             word_status[i] = guess
 
-
 def clear_screen() -> None:
     """
     Clears the console screen based on OS.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-
 
 if __name__ == "__main__":
     main()
