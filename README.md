@@ -37,8 +37,8 @@ Python Hangman Game/
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/python-hangman-game.git
-cd python-hangman-game
+git clone https://github.com/austinelliott9/Python-Hangman-Game.git
+cd Python-Hangman-Game
 ```
 
 2. **Run the game**:
